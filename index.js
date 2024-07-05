@@ -219,7 +219,7 @@ app.get('/hotels/sort/pricing', (req, res) => {
   let pricing = hotels.slice();
   let result = pricing.sort(sortByHotelPrice);
 
-  res.json({sortedHotels: result});
+  res.json({hotels: result});
 });
 
 // function to sort hotel based on rating
@@ -232,7 +232,7 @@ app.get('/hotels/sort/rating', (req, res) => {
   let rating = hotels.slice();
   let result = rating.sort(sortHotelByRating);
  
-  res.json({sortedHotel: result});
+  res.json({hotels: result});
 });
 
 // function to sort based on reviews
@@ -244,7 +244,7 @@ app.get('/hotels/sort/reviews', (req, res) => {
   let reviews = hotels.slice();
   let result = reviews.sort(sortHotelByReviews);
 
-  res.json({sortetHotel: result});
+  res.json({hotels: result});
 });
 
 //function to filter hotel based on hotel amenity
@@ -257,7 +257,7 @@ app.get('/hotels/filter/amenity', (req, res) => {
   let amenity = req.query.amenity
   let result = hotels.filter(hotel => filterByAmenity(hotel, amenity));
 
-  res.json({sortedHotel: result});
+  res.json({hotels: result});
 });
 
 // function to filter based on country
@@ -270,7 +270,7 @@ app.get('/hotels/filter/country', (req, res) => {
   let country = req.query.country;
   let result = hotels.filter(hotel => filterByCountry(hotel, country));
 
-  res.json({sortedHotel: result});
+  res.json({hotels: result});
 });
 
 // function to filter hotel based on category
@@ -283,7 +283,7 @@ app.get('/hotels/filter/category', (req, res) => {
   let category = req.query.category;
   let result = hotels.filter(hotel => filterByCategory(hotel, category));
 
-  res.json({sortedHotel: result});
+  res.json({hotels: result});
 });
 
 // Endpoint 7: Send all hotels
