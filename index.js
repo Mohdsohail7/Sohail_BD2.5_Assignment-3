@@ -1,10 +1,9 @@
 let express = require("express");
 let app = express();
 
-let cors = require("cors");
+const cors = require("cors");
 app.use(cors());
 
-// array of hotels
 let hotels = [
   {
     id: 1,
@@ -212,51 +211,60 @@ let hotels = [
 function sortByHotelPrice(hotel1, hotel2, pricing) {
   if (pricing === "high-to-low") {
     return hotel2.price - hotel1.price;
-  } else {
+  } else if (pricing === "low-to-high") {
     return hotel1.price - hotel2.price;
+  } {
+    return 0;
   }
 }
 
 // Endpoint 1: Get the hotels sorted by pricing
 app.get('/hotels/sort/pricing', (req, res) => {
   
-  let pricing = hotels.slice();
-  let result = pricing.sort(sortByHotelPrice);
+  let pricing = req.query.pricing;
+  let hotelsCopy = hotels.slice();
+  hotelsCopy.sort((hotel1, hotel2) => sortByHotelPrice(hotel1, hotel2, pricing));
 
-  res.json({hotels: result});
+  res.json({hotels: hotelsCopy});
 });
 
 // function to sort hotel based on rating
 function sortHotelByRating(hotel1, hotel2, rating) {
   if (rating === "high-to-low") {
     return hotel2.rating - hotel1.rating;
-  } else {
+  } else if (rating = "low-to-high") {
     return hotel1.rating - hotel2.rating;
+  } else {
+    return 0;
   }
 }
 
 // Endpoint 2: Get the hotels sorted based on their Ratings
 app.get('/hotels/sort/rating', (req, res) => {
-  let rating = hotels.slice();
-  let result = rating.sort(sortHotelByRating);
- 
-  res.json({hotels: result});
+  let rating = req.query.rating;
+  let hotelsCopy = hotels.slice();
+  hotelsCopy.sort((hotel1, hotel2) => sortHotelByRating(hotel1, hotel2, rating));
+  
+  res.json({hotels: hotelsCopy});
 });
 
 // function to sort based on reviews
 function sortHotelByReviews(hotel1, hotel2, reviews) {
   if (reviews === "least-to-most") {
     return hotel1.review - hotel2.review;
-  } else {
+  } else if (reviews === "most-to-least") {
     return hotel2.review - hotel1.review
+  } else {
+    return 0;
   }
 }
 
 app.get('/hotels/sort/reviews', (req, res) => {
-  let reviews = hotels.slice();
-  let result = reviews.sort(sortHotelByReviews);
+  let reviews = req.query.reviews;
+  let hotelsCopy = hotels.slice();
+  hotelsCopy.sort((hotel1, hotel2) => sortHotelByReviews(hotel1, hotel2, reviews));
 
-  res.json({hotels: result});
+  res.json({hotels: hotelsCopy});
 });
 
 //function to filter hotel based on hotel amenity
