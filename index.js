@@ -209,8 +209,12 @@ let hotels = [
 ];
 
 // function to sort hotel by pricing
-function sortByHotelPrice(hotel1, hotel2) {
-   return hotel2.price - hotel1.price;
+function sortByHotelPrice(hotel1, hotel2, pricing) {
+  if (pricing === "high-to-low") {
+    return hotel2.price - hotel1.price;
+  } else {
+    return hotel1.price - hotel2.price;
+  }
 }
 
 // Endpoint 1: Get the hotels sorted by pricing
@@ -223,8 +227,12 @@ app.get('/hotels/sort/pricing', (req, res) => {
 });
 
 // function to sort hotel based on rating
-function sortHotelByRating(hotel1, hotel2) {
-  return hotel1.rating - hotel2.rating;
+function sortHotelByRating(hotel1, hotel2, rating) {
+  if (rating === "high-to-low") {
+    return hotel2.rating - hotel1.rating;
+  } else {
+    return hotel1.rating - hotel2.rating;
+  }
 }
 
 // Endpoint 2: Get the hotels sorted based on their Ratings
@@ -236,8 +244,12 @@ app.get('/hotels/sort/rating', (req, res) => {
 });
 
 // function to sort based on reviews
-function sortHotelByReviews(hotel1, hotel2) {
-  return hotel1.reviews - hotel2.reviews;
+function sortHotelByReviews(hotel1, hotel2, reviews) {
+  if (reviews === "least-to-most") {
+    return hotel1.review - hotel2.review;
+  } else {
+    return hotel2.review - hotel1.review
+  }
 }
 
 app.get('/hotels/sort/reviews', (req, res) => {
