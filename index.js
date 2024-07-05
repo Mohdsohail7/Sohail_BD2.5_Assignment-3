@@ -251,11 +251,11 @@ app.get('/hotels/sort/rating', (req, res) => {
 // function to sort based on reviews
 function sortHotelByReviews(hotel1, hotel2, reviews) {
   if (reviews === "least-to-most") {
-    return hotel1.review - hotel2.review;
+    return hotel1.reviews - hotel2.reviews;
   } else if (reviews === "most-to-least") {
-    return hotel2.review - hotel1.review
+    return hotel2.reviews - hotel1.reviews;
   } else {
-    return 0;
+    return 0; 
   }
 }
 
